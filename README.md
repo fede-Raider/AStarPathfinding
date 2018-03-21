@@ -1,7 +1,7 @@
 # AStarPathfinding
 A* Algorithm implemented in C++
 
-![Pathfinding](https://preview.ibb.co/kQmHxx/Screenshot_2018_03_19_12_18_50.png)
+![Pathfinding](https://image.ibb.co/ibNF4c/Screenshot_2018_03_21_09_48_24.png)
 
 'S' is the starting point;
 
