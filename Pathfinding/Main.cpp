@@ -20,12 +20,10 @@ Node *target;
 
 bool finish = false;
 
-bool compareFunction(Node* a, Node* b) { return ((a->getCostG() + a->getCostH()) > (b->getCostG() + b->getCostH())); }
-
 void generateWalls() {
 	for (int i = 0; i < width; ++i) {
 		for (int j = 0; j < height; ++j) {
-			int random = rand() % 7;
+			int random = rand() % 4;
 			if (random == 0) {
 				map[i][j] = Node(i, j, CellType::wall);
 			} else {
@@ -95,7 +93,7 @@ void draw() {
 	cout << endl;
 }
 
-void addOpenNode(int x, int y) {
+void addOpenNode(const int& x,const  int& y) {
 	if (currentNode->getX() + x >= 0 && currentNode->getX() + x < width && currentNode->getY() + y >= 0 && currentNode->getY() + y < height) {
 		Node* node = &map[currentNode->getX() + x][currentNode->getY() + y];
 		int newCostH = abs(node->getX() - target->getX()) + abs(node->getY() - target->getY());
@@ -125,10 +123,16 @@ void generatePath() {
 	addOpenNode(1, 0);
 	addOpenNode(0, 1);
 	addOpenNode(-1, 0);
+
+	addOpenNode(-1, -1);
+	addOpenNode(1, 1);
+	addOpenNode(-1, 1);
+	addOpenNode(1, -1);
 	if (!finish) {
-		//Ordinare
-		stable_sort(openList.begin(), openList.end(), compareFunction);
-		//
+		//Order
+		stable_sort(openList.begin(), openList.end(), [](Node* lhs,Node* rhs) {
+			return ((lhs->getCostG() + lhs->getCostH()) > (rhs->getCostG() + rhs->getCostH()));
+		});
 		currentNode = openList.back();
 		openList.pop_back();
 		currentNode->setType(CellType::close);

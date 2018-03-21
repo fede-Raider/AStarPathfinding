@@ -7,7 +7,6 @@ Node::Node() : x{ -1 }, y{ -1 } {
 Node::Node(int x, int y, CellType tipo) : x{ x }, y{ y }, tipo{ tipo } {
 }
 
-
 int Node::getCostG() const {
 	return costG;
 }
